@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Dashboard | StudyTrack</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+
+</head>
+
+
+<body>
+
+  <div class="app-shell">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+
+      <div class="logo">
+
+        <div class="logo-circle">
+          🕮
+        </div>
+
+        <span>
+  StudyTrack
+</span>
+
+      </div>
+
+
+      <nav class="nav">
+
+
+        <a
+          href="/dashboard.html"
+          class="active"
+        >
+          <span class="nav-icon">
+            ▣
+          </span>
+
+          Dashboard
+        </a>
+
+
+        <a href="/goals.html">
+
+          <span class="nav-icon">
+            ✓
+          </span>
+
+          Daily Goals
+
+        </a>
+
+        <a href="/reflection-history.html">
+          <span class="nav-icon">◷</span>
+          Reflection History
+        </a>
+
+
+        <a href="/profile.html">
+
+          <span class="nav-icon">
+            ◉
+          </span>
+
+          Profile
+
+        </a>
+
+      </nav>
+
+
+      <div class="logout-wrap">
+
+        <button
+          class="logout-btn"
+          data-logout
+        >
+
+          <span class="nav-icon">
+            ↪
+          </span>
+
+          Logout
+
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+      <!-- HEADER -->
+
+      <header class="page-header">
+
+        <div>
+
+          <h1>
+            Welcome back,
+            <span data-user-name>
+              Student
+            </span>
+            👋
+          </h1>
+
+          <p>
+            Here is your learning progress for today.
+          </p>
+
+        </div>
+
+
+        <button
+          id="addTaskButton"
+          class="primary-btn add-btn"
+        >
+
+          ＋ Add Goal
+
+        </button>
+
+      </header>
+
+
+      <!-- ================= DASHBOARD STATISTICS ================= -->
+
+<section class="stats-grid dashboard-stats">
+
+  <!-- TOTAL GOALS -->
+  <div class="card stat-card total-stat">
+
+    <div class="stat-icon">
+      ✓
+    </div>
+
+    <div class="stat-content">
+      <div class="stat-label">
+        TOTAL GOALS
+      </div>
+
+      <div
+        id="totalTasks"
+        class="stat-value"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- COMPLETED -->
+  <div class="card stat-card completed-stat">
+
+    <div class="stat-icon">
+      ✓
+    </div>
+
+    <div class="stat-content">
+      <div class="stat-label">
+        COMPLETED
+      </div>
+
+      <div
+        id="completedTasks"
+        class="stat-value"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- PENDING -->
+  <div class="card stat-card pending-stat">
+
+    <div class="stat-icon">
+      ○
+    </div>
+
+    <div class="stat-content">
+      <div class="stat-label">
+        PENDING
+      </div>
+
+      <div
+        id="pendingTasks"
+        class="stat-value"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- IN PROGRESS -->
+  <div class="card stat-card progress-stat">
+
+    <div class="stat-icon">
+      ◐
+    </div>
+
+    <div class="stat-content">
+      <div class="stat-label">
+        IN PROGRESS
+      </div>
+
+      <div
+        id="inProgressTasks"
+        class="stat-value"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- OVERALL PROGRESS -->
+  <div class="card stat-card overall-stat">
+
+    <div class="stat-icon">
+      %
+    </div>
+
+    <div class="stat-content">
+
+      <div class="stat-label">
+        OVERALL PROGRESS
+      </div>
+
+      <div
+        id="averageProgress"
+        class="stat-value"
+      >
+        0%
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+      <!-- ================= DASHBOARD CONTENT ================= -->
+
+      <section class="dashboard-grid">
+
+
+        <!-- PROGRESS -->
+
+        <div class="card section-card">
+
+          <h2 class="section-title">
+            Progress Overview
+          </h2>
+
+          <div
+            id="progressOverview"
+            class="progress-overview"
+          ></div>
+
+        </div>
+
+
+        <!-- RECENT GOALS -->
+
+        <div class="card section-card">
+
+          <h2 class="section-title">
+            Recent Goals
+          </h2>
+
+          <div
+            id="recentTasks"
+            class="task-mini-list"
+          ></div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ================= ADD / EDIT GOAL MODAL ================= -->
+
+      <div
+        id="taskModal"
+        class="modal"
+      >
+
+
+        <div class="modal-card">
+
+
+          <div class="modal-header">
+
+            <h2 id="taskModalTitle">
+              Add Goal
+            </h2>
+
+
+            <button
+              id="closeTaskModal"
+              class="close-btn"
+              type="button"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <form id="taskForm">
+
+
+            <input
+              id="taskId"
+              type="hidden"
+            >
+
+
+            <div class="form-grid">
+
+
+              <!-- TITLE -->
+
+              <div class="form-group full">
+
+                <label for="taskTitle">
+                  Goal / Task Title
+                </label>
+
+                <input
+                  id="taskTitle"
+                  type="text"
+                  placeholder="e.g. Complete JavaScript DOM practice"
+                  required
+                  maxlength="120"
+                >
+
+              </div>
+
+
+              <!-- DESCRIPTION -->
+
+              <div class="form-group full">
+
+                <label for="taskDescription">
+                  Description
+                </label>
+
+                <textarea
+                  id="taskDescription"
+                  placeholder="Add a short description"
+                ></textarea>
+
+              </div>
+
+
+              <!-- PRIORITY -->
+
+              <div class="form-group">
+
+                <label for="taskPriority">
+                  Priority
+                </label>
+
+                <select id="taskPriority">
+
+                  <option>
+                    Low
+                  </option>
+
+                  <option selected>
+                    Medium
+                  </option>
+
+                  <option>
+                    High
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- STATUS -->
+
+              <div class="form-group">
+
+                <label for="taskStatus">
+                  Status
+                </label>
+
+                <select id="taskStatus">
+
+                  <option>
+                    Pending
+                  </option>
+
+                  <option>
+                    In Progress
+                  </option>
+
+                  <option>
+                    Completed
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- PROGRESS -->
+
+              <div class="form-group">
+
+                <label for="taskProgress">
+                  Progress (%)
+                </label>
+
+                <input
+                  id="taskProgress"
+                  type="number"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                >
+
+              </div>
+
+
+              <!-- DEADLINE -->
+
+              <div class="form-group">
+
+                <label for="taskDeadline">
+                  Deadline
+                </label>
+
+                <input
+                  id="taskDeadline"
+                  type="date"
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                id="cancelTask"
+                class="secondary-btn"
+                type="button"
+              >
+                Cancel
+              </button>
+
+
+              <button
+                class="primary-btn"
+                type="submit"
+              >
+                Save Goal
+              </button>
+
+            </div>
+
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+  <div id="toastContainer"></div>
+
+
+ <script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/profile.js"></script>
+
+</body>
+
+</html>

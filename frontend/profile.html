@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+ <title>Profile | StudyTrack</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <div class="app-shell">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+
+      <div class="logo">
+
+        <div class="logo-circle">
+          🕮
+        </div>
+
+      <span>
+  StudyTrack
+</span>
+
+      </div>
+
+
+      <nav class="nav">
+
+
+        <a href="/dashboard.html">
+
+          <span class="nav-icon">
+            ▣
+          </span>
+
+          Dashboard
+
+        </a>
+
+
+        <a href="/goals.html">
+
+          <span class="nav-icon">
+            ✓
+          </span>
+
+          Daily Goals
+
+        </a>
+
+
+        <a
+          href="/profile.html"
+          class="active"
+        >
+
+          <span class="nav-icon">
+            ◉
+          </span>
+
+          Profile
+
+        </a>
+
+
+      </nav>
+
+
+      <div class="logout-wrap">
+
+        <button
+          class="logout-btn"
+          data-logout
+        >
+
+          <span class="nav-icon">
+            ↪
+          </span>
+
+          Logout
+
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+      <header class="page-header">
+
+
+        <div>
+
+          <h1>
+            Profile
+          </h1>
+
+          <p>
+            Manage your account and learning information.
+          </p>
+
+        </div>
+
+
+      </header>
+
+
+      <!-- ================= PROFILE ================= -->
+
+      <section class="profile-grid">
+
+
+        <!-- PROFILE CARD -->
+
+        <div class="card profile-card">
+
+
+          <div
+            id="profileAvatar"
+            class="profile-avatar"
+          >
+            ST
+          </div>
+
+
+          <h2 data-profile-name>
+            Student
+          </h2>
+
+
+          <p data-profile-email>
+            student@example.com
+          </p>
+
+
+          <p>
+  StudyTrack Student
+</p>
+
+
+        </div>
+
+
+        <!-- PROFILE FORM -->
+
+        <div class="card section-card">
+
+
+          <h2 class="section-title">
+            Profile Information
+          </h2>
+
+
+          <form
+            id="profileForm"
+            class="profile-form"
+          >
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+              <label for="profileName">
+                Full Name
+              </label>
+
+              <input
+                id="profileName"
+                type="text"
+                required
+                minlength="2"
+                maxlength="60"
+              >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+              <label for="profileEmail">
+                Email
+              </label>
+
+              <input
+                id="profileEmail"
+                type="email"
+                disabled
+              >
+
+            </div>
+
+
+            <!-- PHASE -->
+
+            <div class="form-group">
+
+              <label for="profilePhase">
+                Current Phase
+              </label>
+
+              <select id="profilePhase">
+
+                <option>
+                  Phase 1
+                </option>
+
+                <option>
+                  Phase 2
+                </option>
+
+                <option>
+                  Phase 3
+                </option>
+
+                <option>
+                  Phase 4
+                </option>
+
+                <option>
+                  Phase 5
+                </option>
+
+                <option>
+                  Phase 6
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <button
+              class="primary-btn"
+              type="submit"
+            >
+              Save Changes
+            </button>
+
+
+          </form>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <div id="toastContainer"></div>
+
+
+  <script src="/js/api.js"></script>
+
+  <script src="/js/profile.js"></script>
+
+
+</body>
+
+</html>

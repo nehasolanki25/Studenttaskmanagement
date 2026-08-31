@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Reflection History | StudyTrack</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/reflection-history.css"
+  >
+</head>
+
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+
+        <div class="logo-circle">
+          🕮
+        </div>
+
+        <span>
+          StudyTrack
+        </span>
+
+      </div>
+
+
+      <nav class="nav">
+
+        <a href="/dashboard.html">
+          <span class="nav-icon">▣</span>
+          Dashboard
+        </a>
+
+
+        <a href="/goals.html">
+          <span class="nav-icon">✓</span>
+          Daily Goals
+        </a>
+
+
+        <a
+          href="/reflection-history.html"
+          class="active"
+        >
+          <span class="nav-icon">◷</span>
+          Reflection History
+        </a>
+
+
+        <a href="/profile.html">
+          <span class="nav-icon">◉</span>
+          Profile
+        </a>
+
+      </nav>
+
+
+      <div class="logout-wrap">
+
+        <button
+          type="button"
+          class="logout-btn"
+          data-logout
+        >
+          <span class="nav-icon">
+            ↪
+          </span>
+
+          Logout
+
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main reflection-history-page">
+
+
+      <!-- ===================================================
+           PAGE HEADER
+      ==================================================== -->
+
+      <header class="page-header">
+
+        <div>
+
+          <h1>
+            Reflection History
+          </h1>
+
+          <p>
+            Track your daily thoughts, progress and learnings.
+          </p>
+
+        </div>
+
+
+        <a
+          href="/goals.html"
+          class="primary-btn"
+        >
+
+          <span>
+            ＋
+          </span>
+
+          Add Reflection
+
+        </a>
+
+      </header>
+
+
+
+      <!-- ===================================================
+           SUMMARY / FILTER ROW
+      ==================================================== -->
+
+      <section class="reflection-summary">
+
+
+        <!-- TOTAL REFLECTIONS -->
+
+        <div class="reflection-stat-card">
+
+          <div class="stat-card-icon">
+            ◷
+          </div>
+
+          <div>
+
+            <span class="stat-card-label">
+              TOTAL REFLECTIONS
+            </span>
+
+            <strong
+              id="totalReflections"
+              class="stat-card-value"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED -->
+
+        <div class="reflection-stat-card">
+
+          <div class="stat-card-icon completed">
+            ✓
+          </div>
+
+          <div>
+
+            <span class="stat-card-label">
+              COMPLETED
+            </span>
+
+            <strong
+              id="completedReflections"
+              class="stat-card-value"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SEARCH + DATE FILTER -->
+
+        <div class="reflection-filter-card">
+
+          <div class="search-wrapper">
+
+            <span class="search-icon">
+              🔍
+            </span>
+
+            <input
+              type="text"
+              id="reflectionSearch"
+              placeholder="Search reflections..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="date-filter-wrapper">
+
+            <span class="date-filter-icon">
+              📅
+            </span>
+
+            <input
+              type="date"
+              id="historyDate"
+              aria-label="Filter by date"
+            >
+
+          </div>
+
+
+          <button
+            type="button"
+            id="clearFilters"
+            class="clear-filter-btn"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ===================================================
+           REFLECTION LIST HEADER
+      ==================================================== -->
+
+      <section class="reflection-list-section">
+
+        <div class="reflection-list-header">
+
+          <div>
+
+            <span class="section-eyebrow">
+              YOUR JOURNAL
+            </span>
+
+            <h2>
+              All Reflections
+            </h2>
+
+            <p id="reflectionCount">
+              0 reflections
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             REFLECTION CARDS
+        ================================================== -->
+
+        <div
+          id="historyList"
+          class="history-list"
+        >
+
+          <div class="history-loading">
+
+            <div class="loading-spinner"></div>
+
+            <span>
+              Loading reflections...
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       EDIT REFLECTION MODAL
+  ====================================================== -->
+
+  <div
+    id="historyEditModal"
+    class="reflection-modal"
+  >
+
+    <div class="reflection-modal-card">
+
+
+      <!-- MODAL HEADER -->
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            EDIT REFLECTION
+          </span>
+
+          <h2>
+            Update Reflection
+          </h2>
+
+          <p>
+            Update your daily reflection details.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="closeHistoryEdit"
+          class="close-btn"
+          aria-label="Close modal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+
+      <!-- EDIT FORM -->
+
+      <form id="historyEditForm">
+
+        <input
+          type="hidden"
+          id="historyReflectionId"
+        >
+
+
+        <!-- HOW WAS YOUR DAY -->
+
+        <div class="form-group">
+
+          <label for="historyReflection">
+            How was your day?
+          </label>
+
+          <textarea
+            id="historyReflection"
+            rows="5"
+            placeholder="Write about your day..."
+            required
+          ></textarea>
+
+        </div>
+
+
+
+        <!-- WHAT I LEARNED -->
+
+        <div class="form-group">
+
+          <label for="historyLearned">
+            What I Learned
+          </label>
+
+          <textarea
+            id="historyLearned"
+            rows="5"
+            placeholder="What did you learn today?"
+          ></textarea>
+
+        </div>
+
+
+
+        <!-- CHALLENGES -->
+
+        <div class="form-group">
+
+          <label for="historyChallenges">
+            Challenges
+          </label>
+
+          <textarea
+            id="historyChallenges"
+            rows="5"
+            placeholder="What challenges did you face?"
+          ></textarea>
+
+        </div>
+
+
+
+        <!-- EXTRA DETAILS -->
+
+        <div class="reflection-edit-grid">
+
+
+          <!-- PRIORITY -->
+
+          <div class="form-group">
+
+            <label for="historyPriority">
+              Priority
+            </label>
+
+            <select id="historyPriority">
+
+              <option value="Low">
+                Low
+              </option>
+
+              <option value="Medium">
+                Medium
+              </option>
+
+              <option value="High">
+                High
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- STATUS -->
+
+          <div class="form-group">
+
+            <label for="historyStatus">
+              Status
+            </label>
+
+            <select id="historyStatus">
+
+              <option value="Pending">
+                Pending
+              </option>
+
+              <option value="In Progress">
+                In Progress
+              </option>
+
+              <option value="Completed">
+                Completed
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- PROGRESS -->
+
+          <div class="form-group">
+
+            <label for="historyProgress">
+              Progress
+            </label>
+
+            <input
+              type="number"
+              id="historyProgress"
+              min="0"
+              max="100"
+              placeholder="0"
+            >
+
+          </div>
+
+
+
+          <!-- DEADLINE -->
+
+          <div class="form-group">
+
+            <label for="historyDeadline">
+              Deadline
+            </label>
+
+            <input
+              type="date"
+              id="historyDeadline"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- FORM BUTTONS -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            id="cancelHistoryEdit"
+            class="secondary-btn"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary-btn"
+          >
+            Save Changes
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div id="toastContainer"></div>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="/js/api.js"></script>
+
+  <script src="/js/reflection-history.js"></script>
+
+</body>
+
+</html>

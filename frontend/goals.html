@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Daily Goals | StudyTrack</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        <div class="logo-circle">🕮</div>
+        <span>StudyTrack</span>
+      </div>
+
+      <nav class="nav">
+
+        <a href="/dashboard.html">
+          <span class="nav-icon">▣</span>
+          Dashboard
+        </a>
+
+        <a
+          href="/goals.html"
+          class="active"
+        >
+          <span class="nav-icon">✓</span>
+          Daily Goals
+        </a>
+
+        <a href="/reflection-history.html">
+          <span class="nav-icon">◷</span>
+          Reflection History
+        </a>
+
+        <a href="/profile.html">
+          <span class="nav-icon">◉</span>
+          Profile
+        </a>
+
+      </nav>
+
+      <div class="logout-wrap">
+
+        <button
+          class="logout-btn"
+          data-logout
+          type="button"
+        >
+          <span class="nav-icon">↪</span>
+          Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <header class="page-header">
+
+        <div>
+
+          <h1>
+            Daily Goals
+          </h1>
+
+          <p>
+            Track, filter and manage all your learning goals.
+          </p>
+
+        </div>
+
+        <div class="header-actions">
+
+          <button
+            id="addReflectionButton"
+            class="secondary-btn"
+            type="button"
+          >
+            ✦ Add Reflection
+          </button>
+
+          <button
+            id="addGoalButton"
+            class="primary-btn"
+            type="button"
+          >
+            ＋ Add Goal
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- GOALS -->
+
+      <section class="card section-card">
+
+        <div class="section-heading">
+
+          <div>
+
+            <h2 class="section-title">
+              Your Goals
+            </h2>
+
+            <p class="section-subtitle">
+              Filter goals by date, status and priority.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="toolbar">
+
+          <input
+            id="searchTasks"
+            type="search"
+            placeholder="Search goals..."
+            autocomplete="off"
+          >
+
+          <input
+            id="filterDate"
+            type="date"
+            title="Filter goals by date"
+          >
+
+          <select id="filterStatus">
+
+            <option value="">
+              All Statuses
+            </option>
+
+            <option>
+              Pending
+            </option>
+
+            <option>
+              In Progress
+            </option>
+
+            <option>
+              Completed
+            </option>
+
+          </select>
+
+          <select id="filterPriority">
+
+            <option value="">
+              All Priorities
+            </option>
+
+            <option>
+              Low
+            </option>
+
+            <option>
+              Medium
+            </option>
+
+            <option>
+              High
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table class="task-table">
+
+            <thead>
+
+              <tr>
+
+                <th>Date</th>
+                <th>Goal</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Progress</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="tasksBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- GOAL MODAL -->
+
+      <div
+        id="goalModal"
+        class="modal"
+      >
+
+        <div class="modal-card">
+
+          <div class="modal-header">
+
+            <div>
+
+              <h2 id="goalModalTitle">
+                Add Goal
+              </h2>
+
+            </div>
+
+            <button
+              id="closeGoalModal"
+              class="close-btn"
+              type="button"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <form id="goalForm">
+
+            <input
+              id="goalId"
+              type="hidden"
+            >
+
+            <div class="form-grid">
+
+              <div class="form-group full">
+
+                <label for="goalTitle">
+                  Goal / Task Title
+                </label>
+
+                <input
+                  id="goalTitle"
+                  required
+                  maxlength="120"
+                  placeholder="Enter your goal"
+                >
+
+              </div>
+
+              <div class="form-group full">
+
+                <label for="goalDescription">
+                  Description
+                </label>
+
+                <textarea
+                  id="goalDescription"
+                  placeholder="Add details"
+                ></textarea>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="goalPriority">
+                  Priority
+                </label>
+
+                <select id="goalPriority">
+
+                  <option>
+                    Low
+                  </option>
+
+                  <option selected>
+                    Medium
+                  </option>
+
+                  <option>
+                    High
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="goalStatus">
+                  Status
+                </label>
+
+                <select id="goalStatus">
+
+                  <option>
+                    Pending
+                  </option>
+
+                  <option>
+                    In Progress
+                  </option>
+
+                  <option>
+                    Completed
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="goalProgress">
+                  Progress (%)
+                </label>
+
+                <input
+                  id="goalProgress"
+                  type="number"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                >
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="goalDeadline">
+                  Deadline
+                </label>
+
+                <input
+                  id="goalDeadline"
+                  type="date"
+                >
+
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+
+              <button
+                id="cancelGoal"
+                class="secondary-btn"
+                type="button"
+              >
+                Cancel
+              </button>
+
+              <button
+                class="primary-btn"
+                type="submit"
+              >
+                Save Goal
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- DAILY REFLECTION MODAL -->
+
+      <div
+        id="reflectionModal"
+        class="modal"
+      >
+
+        <div class="reflection-modal-card">
+
+          <div class="modal-header">
+
+            <div>
+
+              <div class="eyebrow">
+                DAILY REFLECTION
+              </div>
+
+              <p class="modal-subtitle">
+                Record what you worked on, learned and found difficult.
+              </p>
+
+            </div>
+
+            <button
+              id="closeReflectionModal"
+              class="close-btn"
+              type="button"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+<div class="reflection-modal-layout">
+
+  <div class="reflection-form-area">
+
+    <div class="section-heading">
+
+      <div>
+
+        <h3 class="section-title">
+          Today's Reflection
+        </h3>
+
+        <p class="section-subtitle">
+          Date:
+          <span id="reflectionDateText">
+            Today
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+
+    <form id="reflectionForm">
+
+      <div class="form-group">
+
+        <label for="reflection">
+          How was your day?
+        </label>
+
+        <textarea
+          id="reflection"
+          required
+          placeholder="Write about what you worked on today..."
+        ></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="whatILearned">
+          What did you learn?
+        </label>
+
+        <textarea
+          id="whatILearned"
+          placeholder="Write the main things you learned today..."
+        ></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="challenges">
+          Challenges
+        </label>
+
+        <textarea
+          id="challenges"
+          placeholder="What was difficult today?"
+        ></textarea>
+
+      </div>
+
+      <div class="reflection-form-grid">
+
+        <div class="form-group">
+
+          <label for="reflectionPriority">
+            Priority
+          </label>
+
+          <select id="reflectionPriority">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reflectionStatus">
+            Status
+          </label>
+
+          <select id="reflectionStatus">
+
+            <option selected>
+              Pending
+            </option>
+
+            <option>
+              In Progress
+            </option>
+
+            <option>
+              Completed
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reflectionProgress">
+            Progress (%)
+          </label>
+
+          <input
+            id="reflectionProgress"
+            type="number"
+            min="0"
+            max="100"
+            value="0"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reflectionDeadline">
+            Deadline
+          </label>
+
+          <input
+            id="reflectionDeadline"
+            type="date"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          id="cancelReflection"
+          class="secondary-btn"
+          type="button"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          Save Reflection
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+  <div id="toastContainer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/goals.js"></script>
+
+</body>
+
+</html>

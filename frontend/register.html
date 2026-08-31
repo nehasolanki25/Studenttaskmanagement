@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Create Account | StudyTrack</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <section class="auth-card">
+
+      <div class="brand-mark">
+        🕮
+      </div>
+
+      <h1>
+        Create Account
+      </h1>
+
+      <p class="auth-subtitle">
+        Start tracking your learning goals and progress
+      </p>
+
+
+      <form id="registerForm">
+
+
+        <div class="form-group">
+
+          <label for="registerName">
+            Full Name
+          </label>
+
+          <input
+            id="registerName"
+            type="text"
+            placeholder="Your name"
+            required
+            minlength="2"
+            maxlength="60"
+            autocomplete="name"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerEmail">
+            Email
+          </label>
+
+          <input
+            id="registerEmail"
+            type="email"
+            placeholder="you@example.com"
+            required
+            autocomplete="email"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerPhase">
+            Current Phase
+          </label>
+
+          <select id="registerPhase">
+
+            <option value="Phase 1">
+              Phase 1
+            </option>
+
+            <option value="Phase 2">
+              Phase 2
+            </option>
+
+            <option value="Phase 3">
+              Phase 3
+            </option>
+
+            <option value="Phase 4">
+              Phase 4
+            </option>
+
+            <option value="Phase 5">
+              Phase 5
+            </option>
+
+            <option value="Phase 6">
+              Phase 6
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerPassword">
+            Password
+          </label>
+
+          <input
+            id="registerPassword"
+            type="password"
+            placeholder="Minimum 6 characters"
+            required
+            minlength="6"
+            autocomplete="new-password"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm Password
+          </label>
+
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder="Repeat your password"
+            required
+            minlength="6"
+            autocomplete="new-password"
+          >
+
+        </div>
+
+
+        <div
+          id="registerMessage"
+          class="message"
+        ></div>
+
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          Create Account
+        </button>
+
+      </form>
+
+
+      <div class="auth-switch">
+
+        Already have an account?
+
+        <a href="/">
+          Sign in
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+
+</body>
+
+</html>
