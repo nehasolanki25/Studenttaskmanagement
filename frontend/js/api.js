@@ -1,4 +1,4 @@
-const API_BASE = "https://studenttaskmanagement-nk7z.onrender.com";
+const API_BASE = "/api";
 
 function getToken() {
   return localStorage.getItem("token");
